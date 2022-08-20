@@ -1,0 +1,6 @@
+// Environment Variables
+.env
+
+// JS things
+package-lock.json
+node_modules/
