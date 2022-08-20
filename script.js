@@ -2,6 +2,10 @@ const { Telegraf } = require('telegraf');
 const axios = require('axios');
 require('dotenv').config();
 
+const flags = {
+    feedback_message: 0
+}
+
 const welcomeText = "Hello, Welcome to capy-bot! \n This bot makes your day better!";
 const CAPYBARA_IMAGE_API_URL = "https://api.capy.lol";
 const CAPYBARA_FACT_API_URL = "https://api.capybara-api.xyz";
@@ -14,6 +18,16 @@ bot.command('fact', ctx => {
     .then(res => ctx.reply(res.data.fact))
     .catch(err  => ctx.reply('Researching Capybaras....'));
 });
+bot.command('send_feedback', ctx => {
+    flags.feedback_message = 1;
+    ctx.reply('Listening To Feedback :)');
+});
+bot.on('message', ctx => {
+    if (flags.feedback_message) {
+        ctx.forwardMessage(process.env.ADMIN_ID);
+        flags.feedback_message = 0;
+    }
+})
 bot.launch();
 
 console.log('Bot Running...');

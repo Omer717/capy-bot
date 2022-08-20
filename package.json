@@ -4,9 +4,9 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node script.js"
   },
-  "author": "",
+  "author": "Omer Shmaryhau",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
