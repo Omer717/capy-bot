@@ -14,11 +14,10 @@ bot.command('fact', ctx => {
     .then(res => ctx.reply(res.data.fact))
     .catch(err  => ctx.reply('Researching Capybaras....'));
 });
-bot.command('test', ctx => console.log(ctx.update.message.from));
 bot.launch();
 
 console.log('Bot Running...');
 
 // Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+// process.once('SIGINT', () => bot.stop('SIGINT'))
+// process.once('SIGTERM', () => bot.stop('SIGTERM'))
