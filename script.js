@@ -14,6 +14,7 @@ bot.command('fact', ctx => {
     .then(res => ctx.reply(res.data.fact))
     .catch(err  => ctx.reply('Researching Capybaras....'));
 });
+bot.command('test', ctx => console.log(ctx.update.message.from));
 bot.launch();
 
 console.log('Bot Running...');
