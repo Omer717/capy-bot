@@ -63,7 +63,7 @@ const initHerokuLaunchOptions = () => {
     :
     undefined;
 }
-bot.startWebhook()
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply(welcomeText));
 bot.command('capybara', sendCapybaraImage);
