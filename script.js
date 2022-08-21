@@ -53,15 +53,15 @@ const handleGetFeedback = (ctx) => {
 }
 
 const initHerokuLaunchOptions = () => {
-    process.env.MODE === 'prod'? 
-    {
-        webhook: {
-            domain: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/${process.env.BOT_TOKEN}`,
-            url: `/${process.env.BOT_TOKEN}`,
-            port: process.env.PORT //Heroku adds this automatically
-    }}
-    :
-    undefined;
+    if (process.env.MODE === 'prod') {
+        return {
+            webhook: {
+                domain: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/${process.env.BOT_TOKEN}`,
+                url: `/${process.env.BOT_TOKEN}`,
+                port: process.env.PORT //Heroku adds this automatically
+        }}    
+    }
+    return undefined;
 }
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -72,7 +72,7 @@ bot.command('send_feedback', handleGetFeedback);
 bot.on('message', messageHandler)
 
 const launchOptions = initHerokuLaunchOptions();
-console.log(process.env.MODE);
+console.log(launchOptions);
 bot.launch(launchOptions);
 
 console.log('Bot Running...');
