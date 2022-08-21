@@ -70,7 +70,7 @@ bot.command('capybara', sendCapybaraImage);
 bot.command('fact', sendCapybaraFact);
 bot.command('send_feedback', handleGetFeedback);
 bot.on('message', messageHandler)
-
+//CHECK
 const launchOptions = initHerokuLaunchOptions();
 bot.launch(launchOptions);
 
