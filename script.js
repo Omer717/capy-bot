@@ -34,10 +34,10 @@ const sendCapybaraFact = (ctx) => {
 const sendFeedbackToAdmin = (ctx) => {
     const senderName = `${ctx.message.from.first_name} ${ctx.message.from.last_name}`;
     const senderId = ctx.message.from.id;
-    let feedbackMessage = message.split(' ');
+    let feedbackMessage = ctx.message.text.split(' ');
     feedbackMessage.shift();
     feedbackMessage  = feedbackMessage.join(' ');
-    bot.telegram.sendMessage(process.env.ADMIN_ID, `user = ${senderName} \nchat_id = ${senderId} \nsent the feedback:${feedbackMessage}`);
+    bot.telegram.sendMessage(process.env.ADMIN_ID, `user = ${senderName} \nchat_id = ${senderId} \nsent the feedback =${feedbackMessage}`);
 }
 
 const handleGetFeedback = (ctx) => {
