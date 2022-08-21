@@ -31,12 +31,20 @@ const sendCapybaraFact = (ctx) => {
     .catch(err  => ctx.reply('Researching Capybaras....'));
 }
 
-const sendFeedbackToAdmin = (ctx) => {
+const sendFeedbackToAdmin = (ctx, isFromCommand) => {
     const senderName = `${ctx.message.from.first_name} ${ctx.message.from.last_name}`;
     const senderId = ctx.message.from.id;
-    let feedbackMessage = ctx.message.text.split(' ');
-    feedbackMessage.shift();
-    feedbackMessage  = feedbackMessage.join(' ');
+    
+    let feedbackMessage;
+    if(isFromCommand) {
+        feedbackMessage = ctx.message.text.split(' ');
+        feedbackMessage.shift();
+        feedbackMessage  = feedbackMessage.join(' ');
+    }
+    else {
+        feedbackMessage = ctx.message.text;
+    }
+    
     bot.telegram.sendMessage(process.env.ADMIN_ID, `user = ${senderName} \nchat_id = ${senderId} \nsent the feedback =${feedbackMessage}`);
 }
 
@@ -44,7 +52,7 @@ const handleGetFeedback = (ctx) => {
     let message = ctx.message.text;
     if(message.split(' ').length > 1) {
         ctx.reply('Thanks for the feedback!');
-        sendFeedbackToAdmin(ctx);
+        sendFeedbackToAdmin(ctx, true);
     }
     else {
         flags.feedback_message = 1;
