@@ -72,6 +72,7 @@ bot.command('send_feedback', handleGetFeedback);
 bot.on('message', messageHandler)
 
 const launchOptions = initHerokuLaunchOptions();
+console.log(launchOptions);
 bot.launch(launchOptions);
 
 console.log('Bot Running...');
