@@ -52,16 +52,29 @@ const handleGetFeedback = (ctx) => {
     }  
 }
 
+const initHerokuLaunchOptions = () => {
+    process.env.MODE === 'prod'? 
+    {
+        webhook: {
+            domain: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/${process.env.BOT_TOKEN}`,
+            url: `/${process.env.BOT_TOKEN}`,
+            port: process.env.PORT //Heroku adds this automatically
+    }}
+    :
+    undefined;
+}
+bot.startWebhook()
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply(welcomeText));
 bot.command('capybara', sendCapybaraImage);
 bot.command('fact', sendCapybaraFact);
 bot.command('send_feedback', handleGetFeedback);
 bot.on('message', messageHandler)
-bot.launch();
+
+const launchOptions = initHerokuLaunchOptions();
+bot.launch(launchOptions);
 
 console.log('Bot Running...');
-
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
