@@ -57,9 +57,8 @@ const initHerokuLaunchOptions = () => {
     {
         webhook: {
             domain: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/${process.env.BOT_TOKEN}`,
-            url: process.env.BOT_TOKEN,
-            host: '0.0.0.0',
-            port: process.env.PORT
+            url: `/${process.env.BOT_TOKEN}`,
+            port: process.env.PORT //Heroku adds this automatically
     }}
     :
     undefined;
